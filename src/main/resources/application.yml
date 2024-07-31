@@ -1,0 +1,22 @@
+server:
+  port: 8888
+  tomcat:
+    connection-timeout: 2s
+    keep-alive-timeout: 15s
+    threads:
+      max: 50
+      min-spare: 10
+
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/alexandresb/config-repo
+          default-label: master
+          #propriété de configuration permettant une meilleure résilience
+          timeout: 5 #temps max pour établir la connexion avec le dépôt distant
+          clone-on-start: true #copie au démarrage en local du dépôt de config distant
+          force-pull: true # récupération d'une copie "neuve" quand le dépôt local est corrompu
